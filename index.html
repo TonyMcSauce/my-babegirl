@@ -5,21 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
-     <button onclick="document.getElementById('bgm').play()"
-        style="padding:10px 20px;
-               border:none;
-               border-radius:20px;
-               background:#e75480;
-               color:white;
-               font-size:16px;
-               cursor:pointer;">
-  ▶ Tap for something special
-</button>
-
-<audio id="bgm" loop>
-  <source src="nikitakondrashev-background-piano-445170.mp3" type="audio/mpeg">
-</audio>
-
       background: #fff0f5;
       font-family: 'Georgia', serif;
       text-align: center;
@@ -28,10 +13,32 @@
     }
     h1 { color: #e75480; }
     p { font-size: 18px; line-height: 1.7; }
-    .heart { font-size: 30px; }
+
+    button {
+      margin-bottom: 30px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      background: #e75480;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
   </style>
 </head>
+
 <body>
+
+  <!-- Play Button -->
+  <button onclick="document.getElementById('bgm').play()">
+    ▶ Tap for something special
+  </button>
+
+  <!-- Background Music -->
+  <audio id="bgm" loop>
+    <source src="nikitakondrashev-background-piano-445170.mp3" type="audio/mpeg">
+  </audio>
+
   <h1>For My lil Bee 💕</h1>
   <p>
     Hey love,<br><br>
@@ -43,5 +50,6 @@
     Happy Valentine’s Day, my lil Bee.<br><br>
     ❤️ Always yours
   </p>
+
 </body>
 </html>
