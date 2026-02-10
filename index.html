@@ -40,6 +40,39 @@
     .line:nth-child(9) { animation-delay: 38s; }
     .line:nth-child(10) { animation-delay: 43s; }
 
+    /* Special styling for the final line */
+    .finale {
+      font-size: 24px;
+      font-family: 'Brush Script MT', cursive;
+      color: #e75480;
+      opacity: 0;
+      margin-top: 20px;
+      position: relative;
+      display: inline-block;
+    }
+
+    /* Confetti hearts */
+    .confetti-heart {
+      position: absolute;
+      font-size: 16px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    @keyframes confettiBurst {
+      0% {
+        opacity: 0;
+        transform: translate(0, 0) scale(0) rotate(0deg);
+      }
+      20% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: translate(var(--tx), var(--ty)) scale(1) rotate(360deg);
+      }
+    }
+
     button {
       margin-bottom: 25px;
       padding: 10px 22px;
@@ -99,8 +132,10 @@
     <span class="line">and the person I choose, always.</span>
     <span class="line"><br></span>
     <span class="line">Happy Valentine's Day, my lil Bee.</span>
-    <span class="line"><br>❤️ Always yours</span>
   </div>
+
+  <!-- Final line with handwritten effect -->
+  <div class="finale" id="finale"></div>
   
   <script>
     const audio = document.getElementById("bgm");
@@ -111,6 +146,9 @@
       fadeInMusic();
       createHearts();
       document.querySelector("button").innerText = "💗 Playing...";
+      
+      // Start the finale after all other text has appeared (47 seconds)
+      setTimeout(showFinale, 47000);
     }
     
     function fadeInMusic() {
@@ -137,6 +175,54 @@
           heart.remove();
         }, 8000);
       }, 600);
+    }
+
+    function showFinale() {
+      const finaleText = "❤️ Always yours";
+      const finaleDiv = document.getElementById("finale");
+      let index = 0;
+
+      // Typewriter effect
+      const typeInterval = setInterval(() => {
+        if (index < finaleText.length) {
+          finaleDiv.innerHTML += finaleText[index];
+          finaleDiv.style.opacity = 1;
+          index++;
+        } else {
+          clearInterval(typeInterval);
+          // Trigger confetti burst after typing is done
+          setTimeout(burstConfetti, 500);
+        }
+      }, 150); // Each character appears every 150ms
+    }
+
+    function burstConfetti() {
+      const finaleDiv = document.getElementById("finale");
+      const numConfetti = 20;
+
+      for (let i = 0; i < numConfetti; i++) {
+        const confetti = document.createElement("span");
+        confetti.classList.add("confetti-heart");
+        confetti.innerHTML = "💕";
+        
+        // Random direction for each confetti piece
+        const angle = (Math.PI * 2 * i) / numConfetti;
+        const distance = 100 + Math.random() * 100;
+        const tx = Math.cos(angle) * distance;
+        const ty = Math.sin(angle) * distance;
+        
+        confetti.style.setProperty('--tx', tx + 'px');
+        confetti.style.setProperty('--ty', ty + 'px');
+        confetti.style.animation = `confettiBurst 1.5s ease-out forwards`;
+        confetti.style.animationDelay = (i * 0.05) + 's';
+        
+        finaleDiv.appendChild(confetti);
+        
+        // Remove confetti after animation
+        setTimeout(() => {
+          confetti.remove();
+        }, 2000);
+      }
     }
   </script>
 </body>
