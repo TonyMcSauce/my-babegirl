@@ -8,19 +8,47 @@
       background: #fff0f5;
       font-family: 'Georgia', serif;
       text-align: center;
-      padding: 40px;
+      padding: 20px;
       color: #333;
-      overflow: hidden;
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden; /* Only hide horizontal overflow */
+      overflow-y: auto; /* Allow vertical scrolling */
     }
+    
+    /* Container for floating hearts - sits behind content */
+    .hearts-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+    
+    /* Content sits above hearts */
+    .content {
+      position: relative;
+      z-index: 1;
+      max-width: 600px;
+      margin: 0 auto;
+      padding-bottom: 50px;
+    }
+    
     h1 { 
       color: #e75480;
       opacity: 0;
       animation: fadeInText 3s ease forwards;
       animation-delay: 1s;
+      margin: 20px 0;
+      font-size: 28px;
     }
     .message {
       font-size: 18px;
       line-height: 1.9;
+      padding: 0 10px;
     }
     .line {
       display: block;
@@ -46,7 +74,7 @@
       font-family: 'Brush Script MT', cursive;
       color: #e75480;
       opacity: 0;
-      margin-top: 20px;
+      margin-top: 30px;
       position: relative;
       display: inline-block;
     }
@@ -75,7 +103,7 @@
 
     button {
       margin-bottom: 25px;
-      padding: 10px 22px;
+      padding: 12px 24px;
       border: none;
       border-radius: 20px;
       background: #e75480;
@@ -88,9 +116,13 @@
       background: #d14370;
       transform: scale(1.05);
     }
+    button:active {
+      transform: scale(0.95);
+    }
+    
     /* Floating hearts */
     .heart {
-      position: fixed;
+      position: absolute;
       bottom: -20px;
       font-size: 20px;
       animation: floatUp 8s linear infinite;
@@ -106,36 +138,58 @@
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    /* Mobile adjustments */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 24px;
+      }
+      .message {
+        font-size: 16px;
+      }
+      .finale {
+        font-size: 20px;
+      }
+      body {
+        padding: 15px;
+      }
+    }
   </style>
 </head>
 <body>
-  <!-- Play Button -->
-  <button onclick="startLove()">
-    ▶ Press play, my love
-  </button>
+  <!-- Container for floating hearts (fixed background) -->
+  <div class="hearts-container" id="heartsContainer"></div>
   
-  <!-- Background Music -->
-  <audio id="bgm" loop>
-    <source src="mixkit-follow-me-home-350.mp3" type="audio/mpeg">
-  </audio>
-  
-  <h1>For My lil Bee 💕</h1>
-  
-  <div class="message">
-    <span class="line">Hey love,</span>
-    <span class="line"><br></span>
-    <span class="line">I know this is just a little page on the internet,</span>
-    <span class="line">but my love for you is anything but little.</span>
-    <span class="line"><br></span>
-    <span class="line">You are my calm in chaos,</span>
-    <span class="line">my laughter on heavy days,</span>
-    <span class="line">and the person I choose, always.</span>
-    <span class="line"><br></span>
-    <span class="line">Happy Valentine's Day, my lil Bee.</span>
-  </div>
+  <!-- Main content (scrollable) -->
+  <div class="content">
+    <!-- Play Button -->
+    <button onclick="startLove()">
+      ▶ Press play, my love
+    </button>
+    
+    <!-- Background Music -->
+    <audio id="bgm" loop>
+      <source src="mixkit-follow-me-home-350.mp3" type="audio/mpeg">
+    </audio>
+    
+    <h1>For My lil Bee 💕</h1>
+    
+    <div class="message">
+      <span class="line">Hey love,</span>
+      <span class="line"><br></span>
+      <span class="line">I know this is just a little page on the internet,</span>
+      <span class="line">but my love for you is anything but little.</span>
+      <span class="line"><br></span>
+      <span class="line">You are my calm in chaos,</span>
+      <span class="line">my laughter on heavy days,</span>
+      <span class="line">and the person I choose, always.</span>
+      <span class="line"><br></span>
+      <span class="line">Happy Valentine's Day, my lil Bee.</span>
+    </div>
 
-  <!-- Final line with handwritten effect -->
-  <div class="finale" id="finale"></div>
+    <!-- Final line with handwritten effect -->
+    <div class="finale" id="finale"></div>
+  </div>
   
   <script>
     const audio = document.getElementById("bgm");
@@ -164,13 +218,14 @@
     }
     
     function createHearts() {
+      const container = document.getElementById("heartsContainer");
       setInterval(() => {
         const heart = document.createElement("div");
         heart.classList.add("heart");
         heart.innerHTML = "❤️";
         heart.style.left = (Math.random() * 90 + 5) + "vw";
         heart.style.fontSize = (Math.random() * 20 + 15) + "px";
-        document.body.appendChild(heart);
+        container.appendChild(heart);
         setTimeout(() => {
           heart.remove();
         }, 8000);
