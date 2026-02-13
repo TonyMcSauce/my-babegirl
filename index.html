@@ -56,17 +56,29 @@
       animation: fadeInText 5s ease forwards;
       margin: 8px 0;
     }
-    /* Staggered delays for each line */
+    /* Staggered delays for each line - adjusted for more lines */
     .line:nth-child(1) { animation-delay: 3s; }
     .line:nth-child(2) { animation-delay: 7s; }
     .line:nth-child(3) { animation-delay: 11s; }
-    .line:nth-child(4) { animation-delay: 16s; }
-    .line:nth-child(5) { animation-delay: 20s; }
-    .line:nth-child(6) { animation-delay: 25s; }
-    .line:nth-child(7) { animation-delay: 29s; }
-    .line:nth-child(8) { animation-delay: 34s; }
-    .line:nth-child(9) { animation-delay: 38s; }
-    .line:nth-child(10) { animation-delay: 43s; }
+    .line:nth-child(4) { animation-delay: 15s; }
+    .line:nth-child(5) { animation-delay: 19s; }
+    .line:nth-child(6) { animation-delay: 23s; }
+    .line:nth-child(7) { animation-delay: 27s; }
+    .line:nth-child(8) { animation-delay: 31s; }
+    .line:nth-child(9) { animation-delay: 35s; }
+    .line:nth-child(10) { animation-delay: 39s; }
+    .line:nth-child(11) { animation-delay: 43s; }
+    .line:nth-child(12) { animation-delay: 47s; }
+    .line:nth-child(13) { animation-delay: 51s; }
+    .line:nth-child(14) { animation-delay: 55s; }
+    .line:nth-child(15) { animation-delay: 59s; }
+    .line:nth-child(16) { animation-delay: 63s; }
+    .line:nth-child(17) { animation-delay: 67s; }
+    .line:nth-child(18) { animation-delay: 71s; }
+    .line:nth-child(19) { animation-delay: 75s; }
+    .line:nth-child(20) { animation-delay: 79s; }
+    .line:nth-child(21) { animation-delay: 83s; }
+    .line:nth-child(22) { animation-delay: 87s; }
 
     /* Special styling for the final line */
     .finale {
@@ -174,30 +186,31 @@
     
     <h1>For My lil Bee 💕</h1>
     
-   <div class="message">
-  <span class="line">Hey love,</span>
-  <span class="line"><br></span>
-  <span class="line">I know this is just a little page on the internet,</span>
-  <span class="line">but my love for you is anything but little.</span>
-  <span class="line"><br></span>
-  <span class="line">Through all we go through—</span>
-  <span class="line">the pain, the sadness, and the good days—</span>
-  <span class="line">I'll be there.</span>
-  <span class="line"><br></span>
-  <span class="line">Remember how we've always found each other?</span>
-  <span class="line">No distance could separate us.</span>
-  <span class="line">My heart still beats the same for you.</span>
-  <span class="line"><br></span>
-  <span class="line">You are my calm in chaos,</span>
-  <span class="line">my laughter on heavy days,</span>
-  <span class="line">and the person I choose, always.</span>
-  <span class="line"><br></span>
-  <span class="line">Your grace, your energy, your beauty—</span>
-  <span class="line">everything about you is perfect to me.</span>
-  <span class="line"><br></span>
-  <span class="line">Happy Valentine's Day, my lil Bee.</span>
-  <span class="line">You're gorgeous, my love.</span>
-</div>
+    <div class="message">
+      <span class="line">Hey love,</span>
+      <span class="line"><br></span>
+      <span class="line">I know this is just a little page on the internet,</span>
+      <span class="line">but my love for you is anything but little.</span>
+      <span class="line"><br></span>
+      <span class="line">Through all we go through—</span>
+      <span class="line">the pain, the sadness, and the good days—</span>
+      <span class="line">I'll be there.</span>
+      <span class="line"><br></span>
+      <span class="line">Remember how we've always found each other?</span>
+      <span class="line">No distance could separate us.</span>
+      <span class="line">My heart still beats the same for you.</span>
+      <span class="line"><br></span>
+      <span class="line">You are my calm in chaos,</span>
+      <span class="line">my laughter on heavy days,</span>
+      <span class="line">and the person I choose, always.</span>
+      <span class="line"><br></span>
+      <span class="line">Your grace, your energy, your beauty—</span>
+      <span class="line">everything about you is perfect to me.</span>
+      <span class="line"><br></span>
+      <span class="line">Happy Valentine's Day, my lil Bee.</span>
+      <span class="line">You're gorgeous, my love.</span>
+    </div>
+
     <!-- Final line with handwritten effect -->
     <div class="finale" id="finale"></div>
   </div>
@@ -212,8 +225,8 @@
       createHearts();
       document.querySelector("button").innerText = "💗 Playing...";
       
-      // Start the finale after all other text has appeared (47 seconds)
-      setTimeout(showFinale, 47000);
+      // Start the finale after all other text has appeared (91 seconds for 22 lines)
+      setTimeout(showFinale, 91000);
     }
     
     function fadeInMusic() {
@@ -244,7 +257,7 @@
     }
 
     function showFinale() {
-      const finaleText = "❤️ Always yours, Tony";
+      const finaleText = "❤️ Always yours";
       const finaleDiv = document.getElementById("finale");
       let index = 0;
 
